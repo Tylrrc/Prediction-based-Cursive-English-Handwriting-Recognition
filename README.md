@@ -6,8 +6,8 @@ Prediction-based Cursive English Handwriting Recognition
 
 **Team members**
 
--Tyler Cummings
--Eric Vo
+- Tyler Cummings
+- Eric Vo
 
 **Description**
 
