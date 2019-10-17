@@ -20,7 +20,7 @@ n_output = 10  # output layer (0-9 digits)
 
 # hyperparameters
 learning_rate = 1e-5    # how much the parameters will adjust at each step of the learning process
-n_iterations = 10000     # how many times we go through the training step
+n_iterations = 3000     # how many times we go through the training step
 batch_size = 128        # how many training examples we are using at each step
 dropout = 0.5           # represents a threshold at which we eliminate some units at random (This helps prevent overfitting.)
 
@@ -58,8 +58,7 @@ layer_2 = tf.add(tf.matmul(layer_1, weights['w2']), biases['b2'])
 layer_3 = tf.add(tf.matmul(layer_2, weights['w3']), biases['b3'])
 layer_drop = tf.nn.dropout(layer_3, keep_prob)
 output_layer = tf.matmul(layer_3, weights['out']) + biases['out']
-
-
+#output_layer = tf.matmul(layer_drop, weights['out']) + biases['out']
 
 cross_entropy = tf.reduce_mean(
     tf.nn.softmax_cross_entropy_with_logits(
@@ -69,7 +68,7 @@ cross_entropy = tf.reduce_mean(
 # The Adam optimizer extends upon gradient descent optimization by
 # using momentum to speed up the process through computing an exponentially
 # weighted average of the gradients and using that in the adjustments
-train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
+train_step = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy)
 
 
 ###############################
@@ -119,7 +118,13 @@ print("\nAccuracy on test set:", test_accuracy)
 
 #load the test image of the handwritten digit:
 # Note: image file must be 28x28 pixels
-for i in range(1,10):
+
+correct = 0
+for i in range(0,10):
     img = np.invert(Image.open("test_images/test" + str(i) + ".png").convert('L')).ravel()
     prediction = sess.run(tf.argmax(output_layer, 1), feed_dict={X: [img]})
     print ("Prediction for test image" + str(i) + ":", np.squeeze(prediction))
+    if str(i) == str(np.squeeze(prediction)):
+        correct += 1
+
+print("Score: " + str(correct/10))
