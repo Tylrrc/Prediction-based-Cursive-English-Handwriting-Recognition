@@ -54,4 +54,4 @@ https://www.idiap.ch/dataset/ccc
 
 [Recognition of Cursive Roman Handwriting - Past, Present and Future](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.1.1763&rep=rep1&type=pdf)
 
-[Recognition-based Segmentation of On-line Cursive Handwriting(https://pdfs.semanticscholar.org/2313/9cf6228053980eeffd42573c61fe5d658004.pdf)
+[Recognition-based Segmentation of On-line Cursive Handwriting](https://pdfs.semanticscholar.org/2313/9cf6228053980eeffd42573c61fe5d658004.pdf)
