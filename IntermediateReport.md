@@ -21,10 +21,14 @@ learning model, has been shown to lead to a 97% rate of success in recognizing c
 
 Our goal with this project is to train a model that can recognize cursive handwritten characters in an image of a word
 and probabilistically predict what the word is, based on the confidence of prediction accuracy. This "confidence" will
- simply be a threshold that must be crossed before a character can be assumed to be correct. For example, consider the 
- word "hello" and its segmented form {'h','e','l','l','o'}. Now, let's say that our threshold for assumed correctness 
- is .95 or 95%. Let's also say that the respective "confidence" levels for the individual characters are 
- {.92, .96, .97, .70, .97}. In this case, we will assume that the letters 'e', 'l', 'o' were correctly predicted. This 
+ simply be a threshold that must be crossed before a character can be assumed to be correct. 
+ 
+####Example with "hello"
+ 
+Consider the word `"hello"` and its segmented form `{'h','e','l','l','o'}`. 
+ Now, let's say that our threshold for assumed correctness 
+ is `.95` or `95%`. Let's also say that the respective "confidence" levels for the individual characters are 
+ `{.92, .96, .97, .70, .97}`. In this case, we will assume that the letters `'e', 'l', 'o'` were correctly predicted. This 
  can be represented by:
  
     actual word                     h e l l o
@@ -84,12 +88,77 @@ In order from left to right, the effects are: None (original image), blur, dilat
 rotation to the left, smooth
 
 As a result of the artificial increase in data, we were left with 379,600 images, which we then split into training and testing sets.
-*The resulting training set has:
-  *7042 images for each character. That is, ‘a’: 7042 images, ‘A’: 7042 images, ‘b’: 7042 images, etc.
-  *Total images in training set: 366184
-*The resulting test set has:
-  *258 images for each character
-  *Total images in test set: 13416
+* The resulting training set has:
+  * 7042 images for each character. That is, ‘a’: 7042 images, ‘A’: 7042 images, ‘b’: 7042 images, etc.
+  * 366184 total images 
+  
+* The resulting test set has:
+  * 258 images for each character
+  * 13416 total images
+  
+## What has been done so far
+
+#### Model
+We have constructed a model utilizing a neural network that can predict *numerical digits* with an accuracy of
+around 90%. This model uses the MNIST dataset for training and testing purposes.
+
+#### Data Collection
+As mentioned above, we found the IDIAP dataset to be unsatisfactory in meeting the needs of the project, so we chose
+to create our own. Using our own cursive handwriting, as well as that of volunteers, we were able to construct a small
+dataset. 
+
+#### Data Generation
+We found that the number of images was not enough to train our model with, so we duplicated the dataset several times over
+and made adjustments to the duplicates, thus artificially increasing the size of the dataset. The images were also all 
+converted to grayscale in preparation for MNIST conversion.
+
+#### MNIST Conversion
+In order for our newly collected and generated data to work with our model, we had to convert the images to MNIST 
+format, which involves dividing the image into individual pixels and inserting the values into a vector. In addition to
+image processing, labels were also created that identified each image.
+
+For example:
+
+label = a
+
+<img src="MarkdownImages/a-0.png" width="100" height="100" />
+
+## Remaining tasks
+
+#### Pipelining
+The project components need to be adjusted to account for the storage issues arising from GitHub. Instead of trying to 
+store the entire dataset on GitHub (which is not allowed), the ideal repository should only contain the original 
+images. Then, once the repository is cloned, the training and testing set generator scripts can be run to build the 
+dataset locally. This will require adjusting the scripts. In a similar fashion, the program to convert the images to 
+MNIST format will be run to prepare the data for training and testing. These three components should be encapsulated
+in a single container that needs to be run only once. The goal pipeline is as follows:
+
+                        -------------------------------------------------------------------------
+                        |                                                                       |
+                        |--> alphaTrainingGenerator.sh -->   |                                  |
+    original images --> |                                    | --> convert-png-to-mnist.py -->  | --> model
+                        |--> alphaTestingGenerator.sh -->    |                                  |
+                        |                                                                       |
+                        -------------------------------------------------------------------------
+
+#### Model tuning
+Once the pipeline has been set up and the data is properly processed, we will need to adjust the model parameters
+ to where it can effectively generalise and predict.
+
+#### Image segmentation
+An additional program will need to be created that will be able to perform image segmentation and de-slanting. By 
+inputting an image of, for example, the word “hello”, the program should output {“h”, “e”, “l”, “l”, “o”}. To accomplish 
+this segmentation, we will be utilizing the Ideal Distance approach. Once the input has been properly segmented and 
+adjusted, its discrete elements will be inserted into a vector and passed to the prediction program.
+
+#### Word prediction
+Lastly, a program will need to be constructed that can predict the word based on the predictive "confidence" of each 
+character.
+Characters identified with a high level of "confidence" above a specific threshold will be assumed to be correct. Based on 
+this assumption, word predictions will be made based on the positively identified letters and the frequency of the word 
+in the English language. A human example of this would be the game Wheel Of Fortune, where contestants guess hidden 
+phrases based on the letters they know the phrase possesses. A specific example of how this portion of the project
+should work is provided above, in the [*Introduction and Problem Description*](#Example-with-"hello") section.
 
 
 
