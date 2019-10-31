@@ -84,8 +84,8 @@ set.
 </p>
 </center>
 
-In order from left to right, the effects are: None (original image), blur, dilate, gauss, octagonal convex hull, 8*degree 
-rotation to the left, smooth
+In order from left to right, the effects are: `None (original image), blur, dilate, gauss, octagonal convex hull, 8*degree 
+rotation to the left, smooth`
 
 As a result of the artificial increase in data, we were left with 379,600 images, which we then split into training and testing sets.
 * The resulting training set has:
@@ -158,7 +158,7 @@ Characters identified with a high level of "confidence" above a specific thresho
 this assumption, word predictions will be made based on the positively identified letters and the frequency of the word 
 in the English language. A human example of this would be the game Wheel Of Fortune, where contestants guess hidden 
 phrases based on the letters they know the phrase possesses. A specific example of how this portion of the project
-should work is provided above, in the [*Introduction and Problem Description*](#Example-with-"hello") section.
+should work is provided above, in the [*Introduction and Problem Description*](#example-with-"hello") section.
 
 
 
