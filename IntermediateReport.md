@@ -23,7 +23,7 @@ Our goal with this project is to train a model that can recognize cursive handwr
 and probabilistically predict what the word is, based on the confidence of prediction accuracy. This "confidence" will
  simply be a threshold that must be crossed before a character can be assumed to be correct. 
  
-#### Example with "hello"
+#### Example with hello
  
 Consider the word `"hello"` and its segmented form `{'h','e','l','l','o'}`. 
  Now, let's say that our threshold for assumed correctness 
@@ -158,7 +158,7 @@ Characters identified with a high level of "confidence" above a specific thresho
 this assumption, word predictions will be made based on the positively identified letters and the frequency of the word 
 in the English language. A human example of this would be the game Wheel Of Fortune, where contestants guess hidden 
 phrases based on the letters they know the phrase possesses. A specific example of how this portion of the project
-should work is provided above, in the [*Introduction and Problem Description*](#example-with-"hello") section.
+should work is provided above, in the [*Introduction and Problem Description*](#example-with-hello) section.
 
 
 
