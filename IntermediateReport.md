@@ -23,7 +23,7 @@ Our goal with this project is to train a model that can recognize cursive handwr
 and probabilistically predict what the word is, based on the confidence of prediction accuracy. This "confidence" will
  simply be a threshold that must be crossed before a character can be assumed to be correct. 
  
-####Example with "hello"
+#### Example with "hello"
  
 Consider the word `"hello"` and its segmented form `{'h','e','l','l','o'}`. 
  Now, let's say that our threshold for assumed correctness 
