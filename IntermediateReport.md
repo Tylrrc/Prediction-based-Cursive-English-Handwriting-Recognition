@@ -2,6 +2,9 @@
 
 ## Introduction and Problem Description
 
+Cursive writing recognition is one of the most challenging research areas in the field of image processing and pattern
+recognition. Each person has a different style of writing the same alphabet. There are also variations in the text written by the same person time to time. The development of cursive writing recognition systems has led to an improved interaction between man and machine. Various research works have been conducted focusing on new techniques that aim at reducing the processing time while providing higher accuracy.
+
 Handwriting recognition can be broken up into two main categories: online and offline recognition. In the case of 
 online handwriting recognition, handwriting input is analyzed as it is being written. Using a stylus to write on an 
 electronic device with a touch screen falls into this category. In offline recognition, however, the text is analyzed 
